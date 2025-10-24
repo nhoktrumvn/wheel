@@ -27,7 +27,7 @@
     { text: "30", percent: 1 / 21 },
     { text: "31", percent: 1 / 21 },
     { text: "32", percent: 1 / 21 },
-    { text: "35", percent: 1 / 21 },
+    { text: "35", percent: 0 / 21 },
     { text: "36", percent: 1 / 21 },
     { text: "40", percent: 1 / 21 },
     { text: "41", percent: 1 / 21 },
