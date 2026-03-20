@@ -141,6 +141,27 @@
     showGift({ ...listGift[fakeIndex], index: fakeIndex });
   };
 
+  const startFakeByIndex = (fakeIndex) => {
+    const availableGifts = getAvailableGifts();
+
+    if (availableGifts.length === 0) {
+      showMsg.innerHTML = "Tất cả các phần thưởng đã được chọn! Vui lòng làm mới trang.";
+      return;
+    }
+
+    // Nếu index này đã được chọn rồi thì không cho quay.
+    if (pickedIndices.includes(fakeIndex)) {
+      showMsg.innerHTML = "Phần thưởng này đã được chọn rồi!";
+      return;
+    }
+
+    showMsg.innerHTML = "";
+    isRotating = true;
+    currentRotate += 360 * 10;
+    rotateWheel(currentRotate, fakeIndex);
+    showGift({ ...listGift[fakeIndex], index: fakeIndex });
+  };
+
   const rotateWheel = (currentRotate, index) => {
     $(".wheel").style.transform = `rotate(${currentRotate - index * rotate - rotate / 2}deg)`;
   };
@@ -203,6 +224,32 @@
     if (event.key === "y" || event.key === "Y") {
       if (!isRotating) {
         startFake2();
+      }
+    }
+
+    // Press "F" to trigger fake spin (index 17 => số 44)
+    if (event.key === "f" || event.key === "F") {
+      if (!isRotating) {
+        startFakeByIndex(17);
+      }
+    }
+
+    // Press "G" to trigger fake spin (index 15 => số 41)
+    if (event.key === "g" || event.key === "G") {
+      if (!isRotating) {
+        startFakeByIndex(15);
+      }
+    }
+
+    // Press "Space" to trigger real spin
+    if (
+      event.code === "Space" ||
+      event.key === " " ||
+      event.key === "Spacebar"
+    ) {
+      if (!isRotating) {
+        event.preventDefault();
+        start();
       }
     }
   });
